@@ -1,0 +1,125 @@
+**************************************
+
+create table BookDataBase (
+id tinyint primary key auto_increment not null,
+title varchar(255) not null, 
+author varchar(255) not null, 
+price decimal(10,2) default 10.00,
+exist boolean default true
+);
+
+**************************************
+
+1. Add 6 different books to the table. (by INSERT function)
+
+insert into BookDataBase (title, author, price, exist)
+values ("Resurrection", "Leo Tolstoy", 10.00, False), 
+("Notr-Dame de Paris", "Victor Hugo", 10.00, True),
+("Crime and punishement", "Fyodor Dostoevsky", 15.00, False),
+("Ward No.6", "Anton Chekhov", 3.00, True),
+("The little prince", "Antoine de Saint-Exupéry", 5.00, True),
+("The fall", "Albert Camus", 7.00, False)
+
+*****************************************
+
+2. Display the table with title and price fields. (SELECT)
+
+select title, price from BookDataBase
+
+*****************************************
+
+3. Display the table with title and price fields where price is higher than 10.00. (WHERE)
+
+select title, price from BookDataBase where price > 10.00
+
+******************************************
+
+4. Display the table with all fields where id is equal to 1. (WHERE)
+
+select * from BookDataBase where id = 1
+
+******************************************
+
+5. Display the table with all fields where id is equal to 1, 2 or 3. (IN)
+
+select * from BookDataBase where id in (1, 2, 3)
+
+*******************************************
+
+6. Display the table with all fields where price is higher than 5.00 and lower than 15.00. (BETWEEN)
+
+select * from BookDataBase where price between 5.01 and 14.99
+
+*******************************************
+
+7. Display the table with all fields where price is lower than 15.00 and where book is exist. (AND)
+
+select * from BookDataBase where price < 15 and exist = True
+
+*******************************************
+
+8. Display the table with all fields where price is lower than 10.00 or id is equal 2. (OR)
+
+select * from BookDataBase where price < 10 or id = 2
+
+*******************************************
+
+9. Display the table with all fields where author start with 'Da'. (LIKE)
+
+select * from BookDataBase where author like "Da%"
+
+*******************************************
+
+10. Display the table with all fields where title contains 'ni'. (LIKE)
+
+select * from BookDataBase where title like "%ni%"
+
+*******************************************
+
+11. Display the table with all fields where author's second and third letters are 'av'. (LIKE)
+
+select * from BookDataBase where author like "_av%"
+
+*******************************************
+
+12. Display the table in ascending order of price. (ORDER BY)
+
+select * from BookDataBase order by id asc
+
+******************************************
+
+13. Display the table in descending order of id. (ORDER BY)
+
+select * from BookDataBase order by id desc
+
+******************************************
+
+14. Change value of exist to false where id equal to 2. (UPDATE)
+
+update BookDataBase set exist = False where id = 2
+
+******************************************
+
+15. Delete book which id equal to 3. (DELETE)
+
+Delete from BookDataBase where id = 3
+
+******************************************
+
+16. Delete the data in the table.
+
+truncate table BookDataBase
+
+******************************************
+
+17. Delete the table.
+
+drop table BookDataBase
+
+******************************************
+
+18. Delete the database
+
+drop database project
+
+*****************************************
