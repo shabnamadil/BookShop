@@ -1,0 +1,115 @@
+***********************************************
+1. Table Book_info
+
+create table Book_info(
+      book_id tinyint unsigned auto_increment primary key,
+      book_title varchar(255) not null, 
+      book_author varchar(255) not null, 
+      published_at smallint(4) not null,
+      exist boolean default true,
+      book_genre varchar(255) not null,
+      book_language varchar(255) not null,
+      price decimal(10,2) default 10.00,
+      author_id tinyint unsigned not null,
+      genre_id tinyint unsigned not null,
+      lang_id tinyint unsigned not null,
+      foreign key (author_id) references Author(id) on delete cascade,
+      foreign key (genre_id) references Genre(Genre_id) on delete cascade,
+      foreign key (lang_id) references Lang(Lang_id) on delete cascade
+);
+
+************************************************
+
+2. Add 5 different books to Book_info table
+
+insert into Book_info (book_title, book_author, published_at, exist, book_genre, book_language, price, author_id, genre_id, lang_id)
+values ("Resurrection", "Leo Tolstoy", 1899, False, "Novel", "Russian", 10.00, 1, 1, 2), 
+("Notr-Dame de Paris", "Victor Hugo", 1831, True, "Fiction", "French", 10.00, 2, 2, 1),
+("Crime and punishement", "Fyodor Dostoevsky", 1866, True, "Fiction", "Russian", 15.00, 3, 2, 2),
+("The fall", "Albert Camus", 1956, False, "Novel", "French", 7.00, 4, 1, 2),
+("The little prince", "Antoine de Saint-Exupéry", 1943, False, "Parable", "French", 5.00, 5, 3, 2)
+
+***********************************************
+
+3. Table author
+
+create table Author(
+      id tinyint unsigned auto_increment primary key,
+      Author_name varchar(200) not null, 
+      Description text
+);
+
+******************************************
+
+4. Add 5 different authors to Author table
+
+insert into Author(Author_name)
+values ("Leo Tolstoy"),
+("Victor Hugo"), 
+("Fyodor Dostoevsky"), 
+("Albert Camus"),
+("Antoine de Saint-Exupéry")
+
+******************************************
+
+5. Table Genre 
+create table Genre(
+      Genre_id tinyint unsigned auto_increment primary key,
+      Genre_name varchar(200) not null
+);
+
+******************************************
+
+6. Add 3 different genre to Genre table
+
+insert into Genre(Genre_name)
+values("novel"), 
+("fiction"), 
+("Parable")
+
+7. Table Lang 
+
+create table Lang(
+      Lang_id tinyint unsigned auto_increment primary key,
+      Lang_code smallint not null,
+      Lang_name varchar(255)
+);
+
+*******************************************
+
+8. Add 3 different languages to Lang table
+
+insert into Lang(Lang_code, Lang_name)
+values (111, "french"),
+(222, "russian"),
+(333, "english");
+
+******************************************
+
+9. 
+
+select Book_info.book_id, Book_info.book_title, Author.Author_name from Book_info
+inner join Author on Book_info.author_id = Author.id
+
+******************************************
+
+10. 
+
+select Book_info.book_id, Book_info.book_title, Genre.Genre_name from Book_info
+left join Genre on Book_info.genre_id = Genre.Genre_id
+
+*****************************************
+
+11. 
+
+select  Lang.Lang_code, Book_info.book_title, Lang.Lang_name from Book_info
+right join Lang on Book_info.lang_id = Lang.Lang_id
+
+*****************************************
+
+12. 
+
+select  Lang.Lang_code, Book_info.book_title, Lang.Lang_name from Book_info
+inner join Lang on Book_info.lang_id = Lang.Lang_id
+
+******************************************
