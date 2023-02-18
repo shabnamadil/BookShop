@@ -16,6 +16,7 @@ class Book(db.Model):
     language = db.Column(db.String(40), nullable = False)
     publisher = db.Column(db.String(60))
     genre_id = db.Column(db.Integer(), db.ForeignKey('genre.id'))
+    comments = db.relationship('Comment', backref = 'comment')
 
     def __repr__(self) :
         return self.title
@@ -39,7 +40,7 @@ class Book(db.Model):
 class Genre(db.Model):
     id = db.Column(db.Integer(), primary_key = True)
     genre = db.Column(db.String(40), nullable = False)
-    book = db.relationship('Book', backref = 'janr')
+    book = db.relationship('Book', backref = 'genre2')
 
     def __repr__(self) :
         return self.genre
@@ -47,6 +48,28 @@ class Genre(db.Model):
     def __init__(self, genre):
         self.genre = genre  
        
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+
+class Comment(db.Model):
+    id = db.Column(db.Integer(), primary_key = True)
+    username = db.Column(db.String(40), nullable = False)
+    email = db.Column(db.String(50), nullable = False)
+    comments = db.Column(db.Text())
+    date= db.Column(db.DateTime())
+    book_id = db.Column(db.Integer(), db.ForeignKey('book.id'))
+
+    def __repr__(self) :
+        return self.username
+
+    def __init__(self, username, email, comments, date):
+        self.username = username
+        self.email = email
+        self.comments = comments
+        self.date = date
+
     def save(self):
         db.session.add(self)
         db.session.commit()
