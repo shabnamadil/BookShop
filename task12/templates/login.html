@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    {% block title %}
+    <title>Login | E-Shopper</title>
+    {% endblock %}
+	
+	<section id="form"><!--form-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-1">
+					<div class="login-form"><!--login form-->
+						<h2>Login to your account</h2>
+						<form action="/login" method="post">
+                            {{ form2.csrf_token }}
+							
+                            {{form2.username(placeholder="Username")}}
+                            {{form2.password(placeholder="Password")}}
+							<!-- <input type="text" placeholder="Username" />
+							<input type="password" placeholder="Password" /> -->
+							<span>
+                                {{form2.signed_in(class="checkbox")}}
+								<!-- <input type="checkbox" class="checkbox">  -->
+								Keep me signed in
+							</span>
+							<button type="submit" class="btn btn-default">Login</button>
+						</form>
+					</div><!--/login form-->
+				</div>
+				<div class="col-sm-1">
+					<h2 class="or">OR</h2>
+				</div>
+				<div class="col-sm-4">
+					<div class="signup-form"><!--sign up form-->
+						<h2>New User Signup!</h2>
+						<form action="/login" method="post">
+                            {{ form1.csrf_token }}
+                            {{ form1.name(placeholder="Name")}}
+                            {{ form1.username(placeholder="Username")}}
+                            {{ form1.email(placeholder="Email Address")}}
+							{% for error in form1.email.errors %}
+							{{error}}
+							{% endfor %}
+                            {{ form1.password(placeholder="Password")}}
+							
+
+							<!-- <input type="text" placeholder="Name"/>
+                            <input type="text" placeholder="Username"/> -->
+							<!-- <input type="email" placeholder="Email Address"/> -->
+							<!-- <input type="password" placeholder="Password"/> -->
+							<button type="submit" class="btn btn-default">Signup</button>
+						</form>
+					</div><!--/sign up form-->
+				</div>
+			</div>
+		</div>
+	</section><!--/form-->
+	
+	
+{% endblock %}	
